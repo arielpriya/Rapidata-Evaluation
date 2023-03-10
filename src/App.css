@@ -102,3 +102,20 @@
 .footer-text{
   color: #f4ebebda;
 }
+
+.thankyou{
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thankyou-image{
+  width: 20%;
+}
+
+@media only screen and (max-width: 425px) {
+  .thankyou-image{
+    width: 40%;
+  }
+}
