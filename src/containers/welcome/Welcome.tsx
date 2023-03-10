@@ -15,7 +15,7 @@ const Welcome = (props: Props) => {
     }
     // to be continued
     const handleClick = () => {
-        //To be continued
+        navigate('/solving')
     }
     return (
         <div>
