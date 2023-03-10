@@ -1,21 +1,22 @@
 import { Routes, Route } from 'react-router-dom';
 import Welcome from '../containers/welcome/Welcome';
+import Solving from '../containers/solving/Solving';
 import Headers from '../components/layout/Header';
-import { Container, ContantWrap } from '../components/common/commonStyle';
 import Footer from '../components/layout/Footer';
 
 
 const RouteList = () => {
   return (
-    <Container>
-      <ContantWrap>
+    <div className='container'>
+      <div>
         <Headers />
         <Routes>
           <Route index element={<Welcome />} />
+          <Route path='/solving' element={<Solving />} />
         </Routes>
-      </ContantWrap>
+      </div>
       <Footer />
-    </Container>
+    </div>
   )
 }
 

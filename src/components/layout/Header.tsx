@@ -1,15 +1,14 @@
 import React from 'react'
-import { Wrapper,TextWrapper } from '../common/commonStyle'
 import LogoComponent from '../../assets/svg/Logo'
 
 const Headers = () => {
   return (
-    <Wrapper>
+    <div className='header'>
         <LogoComponent />
-        <TextWrapper>
+        <div className='logo-heading'>
             Rapidata
-        </TextWrapper>
-    </Wrapper>
+        </div>
+    </div>
   )
 }
 

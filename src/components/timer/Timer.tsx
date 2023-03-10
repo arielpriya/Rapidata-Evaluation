@@ -28,7 +28,7 @@ const Timer = (props: Props) => {
             setTimer(
                 "0" + seconds
             )
-        } else props.redirect('/')
+        } else props.redirect('/solving')
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
