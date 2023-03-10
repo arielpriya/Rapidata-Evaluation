@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { IImage } from '../../models/image.model';
 import Canvas from '../../components/canvas/Canvas';
+import { ICoordinates } from '../../models/coordinates.model';
+import { boundingBoxService } from '../../services/boundingBox.service';
+import { IBoundingBox } from '../../models/boundingBox.model';
 
 //empty for now
 type Props = {
@@ -18,8 +21,19 @@ const Solving = (props: Props) => {
     const navigate = useNavigate();
     // get image url
     const imageUrl = `${process.env.REACT_APP_IMAGE_URL}`
-    const [image, setImage] = useState<string>("");
-    const [target, setTarget] = useState<string>("");
+
+    const [image, setImage] = useState<IImage>({
+        id: '',
+        fileName: '',
+        target: ''
+    });
+
+    const [coordinates, setCoordinates] = useState<ICoordinates>({
+        mouseX:0,
+        mouseY:0,
+        moveX:0,
+        moveY:0
+      })
 
     /**
      * to get image from api 
@@ -28,8 +42,13 @@ const Solving = (props: Props) => {
 
         setTimeout(() => {
             imageService.getImage().then((response: IImage) => {
-                setImage(response?.fileName);
-                setTarget(response.target);
+
+                setImage({
+                    id: response.id,
+                    fileName: response?.fileName,
+                    target: response?.target
+                });
+
             });
         }, 300)
     }
@@ -39,25 +58,37 @@ const Solving = (props: Props) => {
     }, []);
 
      // to be continued
-     const handleClick = () => {
+     const handleNext = () => {
+
+        console.log('coordinates', coordinates, )
+
+       // here we will call the service and pass the co-ordinated to the model
+        // const service = await boundingBoxService.saveBoundingBox()
+
         navigate('/thankyou')
     }
 
-    const handleDraw = () => {
+    const handleCoordinates = (coordinates:ICoordinates) => {
+        setCoordinates(coordinates);
 
     }
     return (
         <div>
             <div>
                 <h1 className='heading'>
-                    Where is the {target}?
+                    Where is the {image.target}?
                 </h1>
             </div>
-
-            {image &&
-                <Canvas draw={handleDraw} imageUrl={`${imageUrl}${image}`} ></Canvas>
-            }
-            <Button label='Next' onClick={handleClick} />
+            <div className='canvas-box'>
+                {image.fileName &&
+                    <Canvas 
+                        handleCoordinate={(e:ICoordinates) => handleCoordinates(e)}
+                        imageUrl={`${imageUrl}${image.fileName}`} 
+                    />
+                }
+               
+                <Button label='Next' onClick={handleNext} />
+            </div>
         </div>
     )
 }
