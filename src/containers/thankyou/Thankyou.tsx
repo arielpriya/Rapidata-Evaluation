@@ -13,7 +13,7 @@ const Thankyou = (props: Props) => {
          <img src={Image} alt='thankYou' width="100%"/>
       </div>
         <h1 className='heading'>
-            ThankYou For Submission!
+            Thankyou for submission!
         </h1>
     </div>
   )
